@@ -71,12 +71,13 @@
         <div class="topbar-right">
 
           <span class="admin-name">
-            管理员
+            {{ adminName }}
           </span>
 
           <el-button
-              type="danger"
-              size="small"
+            type="danger"
+            size="small"
+            @click="logout"
           >
             退出
           </el-button>
@@ -95,6 +96,20 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const adminName = computed(() => {
+  return window.localStorage.getItem('admin_name') || '管理员'
+})
+
+function logout() {
+  window.localStorage.removeItem('admin_token')
+  window.localStorage.removeItem('admin_name')
+  router.push('/login')
+}
 </script>
 
 <style scoped>
