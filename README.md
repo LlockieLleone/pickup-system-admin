@@ -290,6 +290,8 @@ Backend services and Android applications are maintained separately.
 
 后端服务参考 https://github.com/LlockieLleone/pickup-system-service
 
+Android 应用 https://github.com/LlockieLleone/pickup-system-android
+
 ---
 
 # 👨‍💻 Author ｜ 作者
