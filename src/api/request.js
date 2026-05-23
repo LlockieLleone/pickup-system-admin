@@ -31,21 +31,21 @@ request.interceptors.response.use(
     return Promise.reject(new Error(res.message || '请求失败'))
   },
   error => {
+    const res = error.response?.data
+
     if (error.response?.status === 401) {
-      ElMessage.error('登录已过期，请重新登录')
+      ElMessage.error(res?.message || '登录已过期，请重新登录')
       localStorage.removeItem('admin_token')
       localStorage.removeItem('admin_name')
       window.location.href = '/login'
     } else if (error.response?.status === 403) {
-      ElMessage.error('权限不足')
+      ElMessage.error(res?.message || '权限不足')
     } else {
-      ElMessage.error(error.message || '网络错误')
+      ElMessage.error(res?.message || error.message || '网络错误')
     }
 
     return Promise.reject(error)
   }
 )
-
-console.log('API BASE URL:', import.meta.env.VITE_API_BASE_URL)
 
 export default request
